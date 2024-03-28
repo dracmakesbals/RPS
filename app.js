@@ -42,6 +42,13 @@
 //   }
 // };
 
+const buttonRock = document.querySelector("#buttonRock");
+const buttonPaper = document.querySelector("#buttonPaper");
+const buttonScissor = document.querySelector("#buttonScissor");
+const para = document.querySelector("p");
+const playerResultScore = document.querySelector("#playerResultScore");
+const computerResultScore = document.querySelector("#computerResultScore");
+
 getComputerChoice = () => {
   const options = ["rock", "paper", "scissor"];
   return options[Math.floor(Math.random() * options.length)];
@@ -61,29 +68,60 @@ playRound = (playerSelect, computerSelect) => {
   }
 };
 
-playGame = () => {
-  let playerScore = "";
-  let computerScore = "";
+let playerScore = 0;
+let computerScore = 0;
+let roundCount = 0;
 
-  for (let i = 0; i < 5; i++) {
-    const playerSelect = prompt("type your choice");
-    const computerSelect = getComputerChoice();
-    console.log(`you chose ${playerSelect}`);
-    console.log(`the computer chose ${computerSelect}`);
+playGame = (playerSelect) => {
+  const computerSelect = getComputerChoice();
+  console.log(`you chose ${playerSelect}`);
+  console.log(`the computer chose ${computerSelect}`);
 
-    const result = playRound(playerSelect, computerSelect);
-    console.log(result);
-    if (result.includes("Won")) {
-      playerScore++;
-    } else if (result.includes("Lose")) {
-      computerScore++;
-    } else {
-    }
+  const result = playRound(playerSelect, computerSelect);
+  if (result.includes("Won")) {
+    playerScore++;
+    para.textContent = result;
+    para.style.color = "#5dff6c";
+  } else if (result.includes("Lose")) {
+    computerScore++;
+    para.textContent = result;
+    para.style.color = "#ff1918";
+  } else {
+    para.textContent = result;
+    para.style.color = "whitesmoke";
   }
 
-  return `your score: ${playerScore}
-    computer score: ${computerScore}`;
+  playerResultScore.textContent = playerScore;
+  computerResultScore.textContent = computerScore;
+  roundCount++;
+  console.log(roundCount);
+
+  if (playerScore >= 3 || computerScore >= 3 || roundCount >= 5) {
+    if (playerScore > computerScore) {
+      para.textContent = "you win";
+      para.style.color = "#5dff6c";
+    } else if (computerScore > playerScore) {
+      para.textContent = "gaybot69 wins lol";
+      para.style.color = "#ff1918";
+    } else {
+      para.textContent = "game ended in a draw";
+      para.style.color = "whitesmoke";
+    }
+
+    playerScore = 0;
+    computerScore = 0;
+    roundCount = 0;
+  }
 };
 
-let game = playGame();
-console.log(game);
+buttonRock.addEventListener("click", () => {
+  playGame("rock");
+});
+
+buttonPaper.addEventListener("click", () => {
+  playGame("paper");
+});
+
+buttonScissor.addEventListener("click", () => {
+  playGame("scissor");
+});

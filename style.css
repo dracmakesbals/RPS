@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  color: whitesmoke;
+  background-color: #181a1b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  font-size: 40px;
+  padding-bottom: 10px;
+}
+
+button {
+  background-color: #494f52;
+  color: whitesmoke;
+  outline: none;
+  border: none;
+  padding: 5px;
+  font-size: 18px;
+  margin: 0 5px;
+}
+
+.result {
+  padding-top: 20px;
+}
+
+.resultScores {
+  display: flex;
+  padding-top: 5px;
+}
+
+.resultScores p:nth-child(2) {
+  padding-right: 20px;
+}
+
+.resultScores p:nth-child(1) {
+  padding-right: 5px;
+}
+.resultScores p:nth-child(3) {
+  padding-right: 5px;
+}
